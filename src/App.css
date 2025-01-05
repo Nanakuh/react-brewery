@@ -1,0 +1,153 @@
+/* Estilos generales */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+}
+
+/* El contenedor principal que tiene todo el contenido */
+.main-container {
+  flex-grow: 1;
+  padding: 2rem;
+  padding-bottom: 4rem; /* Para dar espacio al footer fijo */
+  margin-top: 60px; /* Altura del header para evitar solapamiento */
+}
+
+/* Estilo para el grid de cervecerías */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+/* Estilo para las tarjetas de las cervecerías */
+.card {
+  background-color: #d2f1f2;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  border-color: rgb(35, 121, 150);
+  border-width: 3px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+/* Alinea el contenedor del menú desplegable a la derecha */
+.select-container {
+  display: flex;
+  justify-content: flex-end; /* Esto alinea el contenido (el select) a la derecha */
+  margin-bottom: 20px; /* Opcional, solo para añadir un poco de espacio entre el menú y las cervecerías */
+}
+.filter {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 8px;
+  margin-right: 5px;
+}
+
+/* Opcional: Estilizar el select para hacerlo más atractivo */
+#country-select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+  color: red;
+}
+.pagination {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente si es necesario */
+  margin-top: 20px; /* Espaciado superior */
+  gap: 10px; /* Espaciado entre los elementos */
+}
+
+.pagination button {
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  background-color: rgb(35, 121, 150); /* Verde */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: rgb(35, 121, 150); /* Verde más oscuro */
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Estilos para el header */
+header {
+  position: fixed; /* Fijar el header en la parte superior */
+  top: 0; /* Alinear al borde superior de la ventana */
+  width: 100%; /* Asegurarse de que ocupe todo el ancho */
+  z-index: 1000; /* Asegurar que esté por encima del resto del contenido */
+  background-color: rgb(219, 159, 31); /* Fondo verde para el header */
+  color: rgb(35, 121, 150); /* Texto blanco */
+  padding: 10px 0; /* Espaciado interno */
+  text-align: center; /* Centrar el texto */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar */
+}
+
+/* Para ajustar el contenido principal al header fijo */
+.main-container {
+  margin-top: 60px; /* Altura del header para evitar solapamiento */
+}
+
+/* Estilo para el footer - Fijo al fondo */
+footer {
+  background-color: rgb(219, 159, 31);
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  position: fixed; /* Lo fijamos en la parte inferior */
+  bottom: 0; /* Lo pegamos al fondo de la ventana */
+  left: 0;
+  width: 100%; /* Aseguramos que ocupe todo el ancho de la pantalla */
+}
+
+/* Responsive */
+
+/* Para pantallas de menos de 768px */
+@media (max-width: 768px) {
+  .main-container {
+    padding: 1rem;
+  }
+
+  .grid-container {
+    grid-template-columns: 1 1fr; /* Una columna por fila */
+  }
+
+  .card {
+    padding: 0.8rem;
+  }
+}
+
+/* Para pantallas de menos de 480px */
+@media (max-width: 480px) {
+  .main-container {
+    padding: 0.5rem;
+  }
+
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 0.5rem;
+  }
+}
