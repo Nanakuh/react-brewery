@@ -106,11 +106,13 @@ const App = () => {
             onChange={handleCountryChange}
           >
             <option value=''>Select a Country</option>
-            {countries.map((countryOption, index) => (
-              <option key={index} value={countryOption}>
-                {countryOption || "Select a Country"}
-              </option>
-            ))}
+            {countries
+              .sort() // Ordena el arreglo de países alfabéticamente
+              .map((countryOption, index) => (
+                <option key={index} value={countryOption}>
+                  {countryOption || "Select a Country"}
+                </option>
+              ))}
           </select>
         </div>
 
