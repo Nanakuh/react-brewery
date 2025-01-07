@@ -96,8 +96,8 @@ header {
   top: 0; /* Alinear al borde superior de la ventana */
   width: 100%; /* Asegurarse de que ocupe todo el ancho */
   z-index: 1000; /* Asegurar que esté por encima del resto del contenido */
-  background-color: rgb(219, 159, 31); /* Fondo verde para el header */
-  color: rgb(35, 121, 150); /* Texto blanco */
+  background-color: rgb(219, 159, 31); 
+  color: rgb(35, 121, 150); 
   padding: 10px 0; /* Espaciado interno */
   text-align: center; /* Centrar el texto */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para resaltar */
