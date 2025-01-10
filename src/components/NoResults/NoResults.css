@@ -1,0 +1,14 @@
+.no-results-container {
+  padding: 20px;
+  text-align: center;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 20px 0;
+  font-family: Arial, sans-serif;
+}
+
+.no-results-message {
+  color: #555;
+  font-size: 18px;
+}

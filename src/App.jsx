@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./App.css";
 import { COUNTRIES } from "./constants/Countries";
+import NoResults from "./components/NoResults/NoResults";
 
 const App = () => {
   const [breweries, setBreweries] = useState([]);
@@ -113,6 +114,8 @@ const App = () => {
           <p>Loading breweries...</p>
         ) : error ? (
           <p className='error-message'>Error: {error}</p>
+        ) : breweries.length === 0 ? (
+          <NoResults />
         ) : (
           <div className='grid-container'>
             {breweries.map((brewery) => (
