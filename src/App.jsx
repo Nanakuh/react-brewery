@@ -4,16 +4,19 @@ import Footer from "./components/Footer";
 import "./App.css";
 import { COUNTRIES } from "./constants/Countries";
 import NoResults from "./components/NoResults/NoResults";
+import { BREWERYTYPES } from "./constants/BreweryTypes";
 
 const App = () => {
   const [breweries, setBreweries] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [apiError, setApiError] = useState(null);
   const [country, setCountry] = useState("");
   const [countries] = useState(COUNTRIES); // Estado para almacenar los países disponibles
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const [breweriesPerPage] = useState(50); // Número de cervecerías por página
   const [hasNextPage, setHasNextPage] = useState(false);
+  const [breweryTypes] = useState(BREWERYTYPES);
+  const [breweryType, setBreweryType] = useState("");
 
   // Función para obtener todas las cervecerías paginadas
   const fetchBreweries = async () => {
@@ -22,18 +25,25 @@ const App = () => {
       if (country !== "") {
         url = `https://api.openbrewerydb.org/breweries?page=${currentPage}&per_page=${breweriesPerPage}&by_country=${country}`;
       }
+
+      if (breweryType !== "" && country !== "") {
+        url = `https://api.openbrewerydb.org/breweries?page=${currentPage}&per_page=${breweriesPerPage}&by_country=${country}&by_type=${breweryType}`;
+      }
+
+      if (breweryType !== "" && country === "") {
+        url = `https://api.openbrewerydb.org/breweries?page=${currentPage}&per_page=${breweriesPerPage}&by_type=${breweryType}`;
+      }
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Error fetching breweries");
       }
       const data = await response.json();
       setBreweries(data);
-    } catch (error) {
-      setError(error.message);
+    } catch (e) {
+      setApiError(e.message);
+    } finally {
       setLoading(false);
     }
-
-    setLoading(false);
   };
 
   const calculateHasNextPage = () => {
@@ -47,7 +57,7 @@ const App = () => {
   // Efecto para obtener las cervecerías y países al cargar la página
   useEffect(() => {
     fetchBreweries();
-  }, [country, currentPage]);
+  }, [country, currentPage, breweryType]);
 
   useEffect(() => {
     calculateHasNextPage();
@@ -108,12 +118,20 @@ const App = () => {
                 ))}
             </select>
           </div>
+          <select onChange={(e) => setBreweryType(e.target.value)}>
+            <option value=''>Select an option</option>
+            {breweryTypes.map((option) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
         </div>
 
-        {loading && !error ? (
+        {loading && !apiError ? (
           <p>Loading breweries...</p>
-        ) : error ? (
-          <p className='error-message'>Error: {error}</p>
+        ) : apiError ? (
+          <p className='error-message'>Error: {apiError}</p>
         ) : breweries.length === 0 ? (
           <NoResults />
         ) : (
