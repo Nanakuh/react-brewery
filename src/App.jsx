@@ -12,6 +12,7 @@ const App = () => {
   const [countries] = useState(COUNTRIES); // Estado para almacenar los países disponibles
   const [currentPage, setCurrentPage] = useState(1); // Página actual
   const [breweriesPerPage] = useState(50); // Número de cervecerías por página
+  const [hasNextPage, setHasNextPage] = useState(false);
 
   // Función para obtener todas las cervecerías paginadas
   const fetchBreweries = async () => {
@@ -34,10 +35,22 @@ const App = () => {
     setLoading(false);
   };
 
+  const calculateHasNextPage = () => {
+    if (breweries.length < breweriesPerPage) {
+      setHasNextPage(false);
+    } else {
+      setHasNextPage(true);
+    }
+  };
+
   // Efecto para obtener las cervecerías y países al cargar la página
   useEffect(() => {
     fetchBreweries();
-  }, [country, currentPage]); // Solo se ejecuta una vez al cargar la página
+  }, [country, currentPage]);
+
+  useEffect(() => {
+    calculateHasNextPage();
+  }, [breweries]);
 
   // Controlador del cambio en el select
   const handleCountryChange = (e) => {
@@ -69,7 +82,9 @@ const App = () => {
               Previous
             </button>
             <span>Page {currentPage}</span>
-            <button onClick={nextPage}>Next</button>
+            <button onClick={nextPage} disabled={hasNextPage ? false : true}>
+              Next
+            </button>
           </div>
 
           {/* Menú desplegable para elegir el país, dinámicamente basado en los países de la API */}
