@@ -21,7 +21,7 @@ const App = () => {
   // Función para obtener todas las cervecerías paginadas
   const fetchBreweries = async () => {
     try {
-      let url = `https://api.openbrewerydb.org/breweries?page=${currentPage}&per_page=${breweriesPerPage}`; // Limitar a 50 cervecerías por página (ajustar si es necesario)
+      let url = `https://api.openbrewerydb.org/breweries?page=${currentPage}&per_page=${breweriesPerPage}`; 
       if (country !== "") {
         url = `https://api.openbrewerydb.org/breweries?page=${currentPage}&per_page=${breweriesPerPage}&by_country=${country}`;
       }
